@@ -1,0 +1,19 @@
+spring:
+  profiles:
+    active: dev
+
+
+
+mybatis:
+  type-aliases-package: com.hao.pojo
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+server:
+  port: 8081
+
+wx:
+  appId: wxe35781703e6544b7
+  mchId:
+  notifyUrl:
+  refundCallbackUrl:
+  client_key:

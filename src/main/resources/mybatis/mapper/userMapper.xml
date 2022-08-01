@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hao.mapper.userMapper">
+
+    <select id="getUserByOpenId" resultType="StudentUser" parameterType="String">
+        select * from shoollife.user where openid = #{openid}
+    </select>
+
+    <insert id="addUser" parameterType="StudentUser">
+        insert into shoollife.user (openid, username) values (#{openid},#{username})
+    </insert>
+
+    <delete id="deleteUserById" parameterType="int">
+        delete from shoollife.user where id = #{id}
+    </delete>
+
+    <update id="updateUser" parameterType="StudentUser">
+        update shoollife.user set openid = #{openid},username = #{username} where id = #{id}
+    </update>
+
+
+</mapper>

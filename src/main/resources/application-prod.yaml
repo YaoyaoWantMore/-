@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    username: hanghao
+    password: eZHtpehKrzXj4LKb
+    url: jdbc:mysql://localhost:3306/shoollife?useSLL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+server:
+  port: 11000
