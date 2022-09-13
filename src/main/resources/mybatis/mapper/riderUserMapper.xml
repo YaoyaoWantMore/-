@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hao.mapper.riderUserMapper">
+    <select id="queryone" parameterType="String" resultType="riderUser">
+        select *
+        from shoollife.rideruser
+        where openid=#{openid};
+    </select>
+    
+    <select id="queryall" resultType="riderUser">
+        select *
+        from shoollife.rideruser;
+    </select>
+    
+    <insert id="enroll" parameterType="riderUser">
+        insert into shoollife.rideruser(name, phone, studentId, college, moneyPackage, orderNum, openid, status)
+        values (#{name},#{phone},#{studentId},#{college},#{moneyPackage},#{orderNum},#{openid},#{status});
+
+    </insert>
+
+    <update id="setStatusTure" parameterType="String">
+        update shoollife.rideruser
+        set status = 1
+        where openid=#{openid};
+    </update>
+
+    <update id="setStatusFalse" parameterType="String">
+        update shoollife.rideruser
+        set status = 2
+        where openid = #{openid};
+    </update>
+
+    <update id="changeMoney">
+        update shoollife.rideruser
+        set moneyPackage = #{money}
+        where openid= #{openid};
+    </update>
+
+    <update id="changeOrder">
+        update shoollife.rideruser
+        set orderNum = #{orderNum}
+        where openid= #{openid};
+    </update>
+
+
+
+</mapper>
