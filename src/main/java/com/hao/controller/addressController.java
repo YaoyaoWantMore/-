@@ -123,10 +123,15 @@ public class addressController {
                 return orderUser;
             }
         }
-        orderUser.setName(list.get(0).getName());
-        orderUser.setUseraddress(list.get(0).getAddress()+list.get(0).getAddress_detail());
-        orderUser.setPhone(list.get(0).getPhone());
-        orderUser.setDatetimesingle(date.getTime());
-        return orderUser;
+        if(list.isEmpty()){
+            return orderUser;
+        }else{
+            orderUser.setName(list.get(0).getName());
+            orderUser.setUseraddress(list.get(0).getAddress()+list.get(0).getAddress_detail());
+            orderUser.setPhone(list.get(0).getPhone());
+            orderUser.setDatetimesingle(date.getTime());
+            return orderUser;
+        }
+
     }
 }

@@ -13,6 +13,8 @@ public class FeedBack {
     private String description;
     private String openid;
     private String contact;
-    private int contact_type;
+    private String contact_type;
     private int status;
+    private String order_id;
+
 }

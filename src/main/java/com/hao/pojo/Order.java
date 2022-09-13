@@ -19,5 +19,6 @@ public class Order {
     private String order_address;
     private String order_detail;
     private String openid;
+    private String rider;
     private int status;
 }

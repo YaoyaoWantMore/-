@@ -17,8 +17,8 @@ public class feedbackServiceImpl implements feedbackService{
     }
 
     @Override
-    public List<FeedBack> getAll(String openid) {
-        List<FeedBack> all = mapper.getAll(openid);
+    public List<FeedBack> getAll() {
+        List<FeedBack> all = mapper.getAll();
         return all;
     }
 

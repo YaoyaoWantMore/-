@@ -7,7 +7,15 @@
         select * from shoollife.order where openid=#{openid}
     </select>
 
-    <update id="ChangeStatus" parameterType="int">
+    <select id="getOrdersByRider" parameterType="String" resultType="Order">
+        select * from shoollife.order where rider=#{rider}
+    </select>
+
+    <select id="getAll"  resultType="Order">
+        select * from shoollife.order
+    </select>
+
+    <update id="ChangeStatus">
         update shoollife.order
         set status = #{status}
         where id = #{id};
@@ -18,9 +26,25 @@
         values (#{order_id},#{user_name},#{user_phone},#{user_address},#{order_price},#{openid},#{status},#{order_time},#{order_address},#{order_detail});
     </insert>
 
-    <delete id="deleteOrder" parameterType="String">
-        delete from shoollife.order where order_id = #{order_id}
-    </delete>
+
+
+    <update id="deleteOrder" parameterType="String">
+        update shoollife.`order`
+        set status = 5
+        where order_id = #{order_id};
+    </update>
+
+    <update id="TodoOrder" >
+        update shoollife.`order`
+        set rider = #{rider},status=4
+        where order_id=#{order_id};
+    </update>
+
+    <update id="RiderCancel" >
+        update shoollife.`order`
+        set rider = #{rider},status=0
+        where order_id=#{order_id};
+    </update>
 
 
 

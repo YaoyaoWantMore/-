@@ -2,6 +2,7 @@ package com.hao.controller;
 
 import com.hao.pojo.FeedBack;
 import com.hao.service.feedbackServiceImpl;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,12 +18,17 @@ public class FeedBackController {
     private feedbackServiceImpl service;
 
     @RequestMapping(value = "/addNew",produces = "application/json;charset=UTF-8")
-    public String addNew(Map<String,Object> map){
+    public String addNew(@RequestBody Map<String,Object> map){
 
         FeedBack feedBack = new FeedBack();
         feedBack.setStatus(0);
-        feedBack.setQuestion_type((Integer) map.get("question_type"));
-        feedBack.setContact_type((Integer)map.get("contact_type"));
+        System.out.println("map的值为"+map.get("question_type")+"类型为"+map.get("question_type").getClass().getName());
+        Integer question_type = (Integer) map.get("question_type");
+        feedBack.setQuestion_type(question_type.intValue());
+        if(feedBack.getQuestion_type()==0){
+            feedBack.setOrder_id((String)map.get("order_id"));
+        }
+        feedBack.setContact_type((String)map.get("contact_type"));
         feedBack.setContact((String)map.get("contact"));
         feedBack.setDescription((String)map.get("description"));
         feedBack.setId(-1);
@@ -33,13 +39,9 @@ public class FeedBackController {
         }else {
             return "0";
         }
+
     }
 
-    @RequestMapping(value = "/getAll",produces = "application/json;charset=UTF-8")
-    public List<FeedBack> getAll(Map<String,Object> map){
-        String openid = (String)map.get("openid");
-        List<FeedBack> all = service.getAll(openid);
-        return all;
-    }
+
 
 }

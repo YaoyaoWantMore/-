@@ -9,7 +9,7 @@ public interface feedbackService {
 
     public int addNewOne(FeedBack feedBack);
 
-    public List<FeedBack> getAll(String openid);
+    public List<FeedBack> getAll();
 
     public int delete(int id);
 

@@ -13,7 +13,7 @@ public interface feedbackMapper {
 
     public int deleteFeedBack(int id);
 
-    public List<FeedBack> getAll(String openid);
+    public List<FeedBack> getAll();
 
     public FeedBack getOne(int id);
 

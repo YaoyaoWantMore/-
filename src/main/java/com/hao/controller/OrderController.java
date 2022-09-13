@@ -3,11 +3,11 @@ package com.hao.controller;
 import com.hao.pojo.Order;
 import com.hao.pojo.OrderShow;
 import com.hao.pojo.OrderShowDetail;
-import com.hao.pojo.OrderUser;
+
 import com.hao.service.orderServiceImpl;
 import com.hao.util.SnowFlakeUtil;
 import com.hao.util.TimeUtil;
-import org.springframework.stereotype.Controller;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +16,7 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/v/my/order")
@@ -53,20 +54,22 @@ public class OrderController {
         List<Order> allOrder = service.getAllOrder(openid);
         List<OrderShow> list = new ArrayList<>();
         for (Order order : allOrder) {
-            System.out.println(order.getOrder_id());
-            String status;
-            if(order.getStatus()==0){
-                status="未完成";
-            }else if(order.getStatus()==1){
-                status="已完成";
-            }else if(order.getStatus()==2){
-                status="已取消";
-            }else if(order.getStatus()==3){
-                status="已退款";
-            }else {
-                status="进行中";
+            if(order.getStatus()!=5){
+                String status;
+                if(order.getStatus()==0){
+                    status="待接单";
+                }else if(order.getStatus()==1){
+                    status="已完成";
+                }else if(order.getStatus()==2){
+                    status="已取消";
+                }else if(order.getStatus()==3){
+                    status="已退款";
+                }else {
+                    status="进行中";
+                }
+                list.add(new OrderShow(order.getId(),order.getOrder_id(),status,order.getOrder_price()));
             }
-            list.add(new OrderShow(order.getId(),order.getOrder_id(),status,order.getOrder_price()));
+
         }
         Collections.reverse(list);
         return list;
@@ -108,25 +111,11 @@ public class OrderController {
         }
     }
 
-    @RequestMapping("/refound")
-    public String refoundOrder(@RequestParam("id")String id){
-        int Iid;
-        if(id.equals("undefined")||id.equals("")){
-            return "0";
-
-        }else{
-            Iid = Integer.valueOf(id);
-        }
-        int i = service.refoundOrder(Iid);
-        if(i>0){
-            return "1";
-        }else {
-            return "0";
-        }
-    }
 
     @RequestMapping("/delete")
-    public String deleteOrder(@RequestParam("orderCode")String order_id){
+    public String deleteOrder(@RequestParam(value = "order_id")String order_id){
+
+        System.out.println(order_id);
 
         int i = service.deleteOrder(order_id);
         System.out.println("删除情况"+i);
@@ -151,7 +140,7 @@ public class OrderController {
         System.out.println("时间戳是"+order_time);
         String order_id = new SnowFlakeUtil().getId();
         int status = 0;
-        Order order  = new Order(-1,order_id,user_name,user_phone,user_address,order_price,order_time,order_address,order_detail,openid,status);
+        Order order  = new Order(-1,order_id,user_name,user_phone,user_address,order_price,order_time,order_address,order_detail,openid,"no",status);
 
         int i = service.addOrder(order);
         return i;

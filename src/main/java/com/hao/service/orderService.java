@@ -7,6 +7,10 @@ import java.util.List;
 public interface orderService {
     public List<Order> getAllOrder(String openid);
 
+    public List<Order> getOrderByRider(String rider);
+
+    public List<Order> getAll();
+
     public int addOrder(Order order);
 
     public int completeOrder(int id);
@@ -15,7 +19,9 @@ public interface orderService {
 
     public int refoundOrder(int id);
 
-    public int DoOrder(int id);
+    public int DoOrder(String order_id,String rider,String orderNum);
+
+    public int RiderCancel(String order_id,String rider,String orderNum);
 
     public int deleteOrder(String order_id);
 }

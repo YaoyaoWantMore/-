@@ -5,18 +5,18 @@
 <mapper namespace="com.hao.mapper.feedbackMapper">
 
     <insert id="addFeedBack" parameterType="FeedBack">
-        insert into shoollife.feedback(question_type, description, openid, contact, contact_type, status)
-        values (#{question_type},#{description},#{openid},#{contact},#{contact_type},#{status});
+        insert into shoollife.feedback(question_type, description, openid, contact, contact_type, status, order_id)
+        values (#{question_type},#{description},#{openid},#{contact},#{contact_type},#{status},#{order_id});
     </insert>
 
     <delete id="deleteFeedBack" parameterType="int">
         delete from shoollife.feedback where id = #{id}
     </delete>
 
-    <select id="getAll" parameterType="String" resultType="FeedBack">
+    <select id="getAll"  resultType="FeedBack">
         select *
         from shoollife.feedback
-        where openid = #{openid}
+
     </select>
 
     <select id="getOne" resultType="FeedBack" parameterType="int">
